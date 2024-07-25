@@ -33,11 +33,11 @@ COPY --link . .
 
 
 # Build application
-RUN yarn run build
+RUN yarn build
 
 
 # Run tests
-RUN yarn run test
+RUN yarn test
 
 # Final stage for app image
 FROM base
