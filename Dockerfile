@@ -23,7 +23,7 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY --link yarn.lock package.json ./
-RUN npm ci --include=dev
+# RUN yarn ci --include=dev
 
 # Copy application code
 COPY --link . .
@@ -33,11 +33,11 @@ COPY --link . .
 
 
 # Build application
-RUN npm run build
+RUN yarn run build
 
 
 # Run tests
-RUN npm run test
+RUN yarn run test
 
 # Final stage for app image
 FROM base
@@ -47,4 +47,4 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "npm", "run", "start:migrate:prod" ]
+CMD [ "yarn", "start:migrate:prod" ]
