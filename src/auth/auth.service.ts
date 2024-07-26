@@ -37,11 +37,10 @@ export class AuthService {
   }
 
   async signUp(signUpDto: UserDto){
+    console.log("sdfsd")
     const user = await this.usersService.createUser({
       username: signUpDto.username,
       password: signUpDto.password,
-      confirmPassword: "",
-      designation: "",
     });
     return user;
   }

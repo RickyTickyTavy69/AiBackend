@@ -9,10 +9,6 @@ export class User{
   username: string;
   @Prop({required: true})
   password: string;
-  @Prop({required: true})
-  confirmPassword: string;
-  @Prop({required: true})
-  designation: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
