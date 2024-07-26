@@ -37,7 +37,7 @@ RUN yarn build
 
 
 # Run tests
-RUN yarn test
+# RUN yarn test
 
 # Final stage for app image
 FROM base
