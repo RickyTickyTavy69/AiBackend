@@ -23,7 +23,7 @@ RUN apt-get update -qq && \
 
 # Install node modules
 COPY --link yarn.lock package.json ./
-# RUN yarn ci --include=dev
+RUN yarn --include=dev
 
 # Copy application code
 COPY --link . .
