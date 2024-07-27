@@ -6,14 +6,17 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { AuthGuard } from './auth.guard';
+import { MongooseModule } from '@nestjs/mongoose';
+import {Token, TokenSchema} from './schema/token.schema';
 
 @Module({
   imports: [
+    MongooseModule.forFeature([{name: Token.name, schema: TokenSchema}]),
     UsersModule,
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: "1d"}
+      secret: process.env.JWT_ACCESS_SECRET,
+      signOptions: { expiresIn: "15min"}
     })
   ],
   controllers: [AuthController],

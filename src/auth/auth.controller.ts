@@ -1,5 +1,6 @@
 import { Controller, Post, HttpCode, HttpStatus, Body } from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Response } from 'express';
 
 import {AuthService } from './auth.service';
 import {UserDto} from '../users/dto/user.dto';
@@ -35,7 +36,9 @@ export class AuthController {
     description: "User signUp successfully",
     type: [UserDto]
   })
-  signUp(@Body() singUpDto: UserDto){
-    return this.authService.signUp(singUpDto)
+  async signUp(@Body() singUpDto: UserDto, res: Response){
+    const signUpData = await this.authService.signUp(singUpDto);
+    res.cookie("refresh_token", signUpData.refresh_token, {maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true});
+    return signUpData;
   }
 }
