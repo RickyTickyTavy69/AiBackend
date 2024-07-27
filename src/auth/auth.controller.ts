@@ -1,4 +1,4 @@
-import { Controller, Post, HttpCode, HttpStatus, Body } from '@nestjs/common';
+import { Controller, Post, HttpCode, HttpStatus, Body, Res } from '@nestjs/common';
 import {ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
@@ -36,7 +36,7 @@ export class AuthController {
     description: "User signUp successfully",
     type: [UserDto]
   })
-  async signUp(@Body() singUpDto: UserDto, res: Response){
+  async signUp(@Body() singUpDto: UserDto, @Res() res: Response){
     const signUpData = await this.authService.signUp(singUpDto);
     res.cookie("refresh_token", signUpData.refresh_token, {maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true});
     return signUpData;
